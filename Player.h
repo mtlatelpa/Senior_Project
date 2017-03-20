@@ -30,4 +30,6 @@ public:
 	bool faceLeft = true;
 	bool faceUp = true;
 	bool faceDown = true;
+	//Player Health+
+	int health = 5;
 };

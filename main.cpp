@@ -7,6 +7,7 @@
 #include "Audio.h"
 #include "Graphic.h"
 #include "Player.h"
+#include "Resource.h"
 #include "Wall.h"
 
 using namespace std;
@@ -87,7 +88,7 @@ int main() {
 	//playerTexture.loadFromFile("char_sprite_walk2.png");
 	playerTexture.loadFromFile("char_sprite_walk_swords.png");
 
-	// Wall creation
+	// Wall creation + texture
 	vector<Wall>::const_iterator wallit;
 	vector<Wall> wallArray;
 
@@ -104,6 +105,15 @@ int main() {
 	/*sf::Texture textureWall;
 	textureWall.loadFromFile("wall.jpg");
 	wall1.rect.setTexture(&textureWall);*/
+
+	// Resource creation + texture
+	vector<Resource>::const_iterator resourceit;
+	vector<Resource> resourceArray;
+
+	class Resource resource1;
+	sf::Texture textureResource1;
+	//textureResource1.loadFromFile("res2.png");
+	//resource1.sprite.setTexture(textureResource1);
 
 	/*for (int i = 0; i <= 720; i += 50) {
 		wall1.rect.setPosition(i, 0);
@@ -150,6 +160,33 @@ int main() {
 		wall1.rect.setPosition(600, i);
 		wallArray.push_back(wall1);
 	}*/
+
+	resource1.resource1 = true;
+	resource1.resource2 = false;
+	resource1.resource3 = false;
+	resource1.rect.setFillColor(sf::Color::Green);
+	//resource1.sprite.setTexture(textureResource1);
+	//resource1.sprite.setTextureRect(sf::IntRect(32, 32, 32, 32));
+	resource1.rect.setPosition(300, 350);
+	resourceArray.push_back(resource1);
+
+	resource1.resource1 = false;
+	resource1.resource2 = true;
+	resource1.resource3 = false;
+	resource1.rect.setFillColor(sf::Color::Blue);
+	//resource1.sprite.setTexture(textureResource1);
+	//resource1.sprite.setTextureRect(sf::IntRect(32, 32, 32, 32));
+	resource1.rect.setPosition(400, 250);
+	resourceArray.push_back(resource1);
+
+	resource1.resource1 = false;
+	resource1.resource2 = false;
+	resource1.resource3 = true;
+	resource1.rect.setFillColor(sf::Color::Red);
+	//resource1.sprite.setTexture(textureResource1);
+	//resource1.sprite.setTextureRect(sf::IntRect(32, 32, 32, 32));
+	resource1.rect.setPosition(200, 250);
+	resourceArray.push_back(resource1);
 
 	//New texture coordinates
 	Player player(&playerTexture, sf::Vector2u(3, 3), 0.3f, 100.0f);
@@ -290,6 +327,19 @@ int main() {
 		window.draw(wall1.sprite);
 		window.draw(wall2.sprite);
 		window.draw(wall3.sprite);
+		//window.draw(resource1.sprite);
+
+		//Draw resource
+		counter = 0;
+		for (resourceit = resourceArray.begin(); resourceit != resourceArray.end(); resourceit++)
+		{
+			resourceArray[counter].update();
+
+			window.draw(resourceArray[counter].rect);
+			window.draw(resourceArray[counter].sprite);
+			counter++;
+		}
+
 		//window.draw(player);
 		window.draw(graphic.backgroundTree);
 		
