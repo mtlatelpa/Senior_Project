@@ -7,9 +7,7 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	row = 0;
 	face = true;
 
-	/*body.setSize(sf::Vector2f(40.0f, 40.0f));
-	body.setPosition(206.0f, 206.0f);*/
-	body.setSize(sf::Vector2f(50.0f, 50.0f));
+	body.setSize(sf::Vector2f(45.0f, 45.0f));
 	body.setPosition(360.0f, 240.0f);
 	body.setTexture(texture);
 
@@ -26,7 +24,6 @@ void Player::Update(float deltaTime)
 {
 	movement.x = 0.0f;
 	movement.y = 0.0f;
-	//sf::Vector2f movement(0.0f, 0.0f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		sound.play();
 		if (faceLeft == true) {
@@ -69,7 +66,7 @@ void Player::Update(float deltaTime)
 	//Switching map locations
 	const float playerposx = body.getPosition().x;
 	const float playerposy = body.getPosition().y;
-	std::cout << "x: " << playerposx << "     " << "y: " << playerposy << std::endl;
+	//std::cout << "x: " << playerposx << "     " << "y: " << playerposy << std::endl;
 
 	//checking if player is in east quadrant
 	if (body.getPosition().x > 720.0f) {
@@ -108,7 +105,6 @@ void Player::Update(float deltaTime)
 	}
 	if (movement.y < 0.0f) {
 		row = 2;
-
 	}
 
 	animation.Update(row, deltaTime, face);

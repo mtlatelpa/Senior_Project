@@ -24,8 +24,11 @@ public:
 	//North background image
 	sf::RectangleShape background5;
 	sf::Texture backgroundImage5;
-
+	//Tree image
 	sf::RectangleShape backgroundTree;
 	sf::Texture treeTexture;
+	//Menu Image
+	sf::RectangleShape menuImage;
+	sf::Texture menuTexture;
 
 };

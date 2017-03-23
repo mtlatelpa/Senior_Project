@@ -18,7 +18,7 @@ public:
 	sf::Sound sound;
 	sf::View view;
 
-	//Player+Movement+Collision
+	//Player+Movement
 	sf::Vector2f movement;
 	sf::RectangleShape body;
 	Animation animation;
@@ -26,6 +26,7 @@ public:
 	float speed;
 	int direction = 0;
 	bool face;
+	//Collision detection
 	bool faceRight = true;
 	bool faceLeft = true;
 	bool faceUp = true;

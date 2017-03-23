@@ -16,6 +16,4 @@ public:
 	sf::SoundBuffer attackSoundBuf;
 
 	sf::Music backgroundmusic1;
-
-
 };

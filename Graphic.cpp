@@ -39,6 +39,11 @@ Graphic::Graphic()
 	treeTexture.loadFromFile("dark_tree.png");
 	backgroundTree.setTexture(&treeTexture);
 
+	//Menu Image
+	menuImage.setSize(sf::Vector2f(720.0f, 480.0f));
+	menuTexture.loadFromFile("menu_1.png");
+	menuImage.setTexture(&menuTexture);
+
 }
 
 Graphic::~Graphic() { }
