@@ -27,7 +27,7 @@ void Player::Update(float deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		sound.play();
 		if (faceLeft == true) {
-			std::cout << "moving left" << std::endl;
+			//std::cout << "moving left" << std::endl;
 			movement.x -= speed * deltaTime;
 			direction = 3;
 			faceLeft = true; faceDown = true;
@@ -36,7 +36,7 @@ void Player::Update(float deltaTime)
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		if (faceRight == true) {
-			std::cout << "moving right" << std::endl;
+			//std::cout << "moving right" << std::endl;
 			movement.x += speed * deltaTime;
 			direction = 4;
 			faceLeft = true; faceDown = true;
@@ -45,7 +45,7 @@ void Player::Update(float deltaTime)
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		if (faceUp == true) {
-			std::cout << "moving up" << std::endl;
+			//std::cout << "moving up" << std::endl;
 			movement.y -= speed * deltaTime;
 			direction = 1;
 			faceLeft = true; faceDown = true;
@@ -54,7 +54,7 @@ void Player::Update(float deltaTime)
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		if (faceDown == true) {
-			std::cout << "moving down" << std::endl;
+			//std::cout << "moving down" << std::endl;
 			movement.y += speed * deltaTime;
 			direction = 2;
 			faceLeft = true; faceDown = true;

@@ -6,6 +6,7 @@ public:
 	bool resource1 = false;
 	bool resource2 = false;
 	bool resource3 = false;
+	bool gathered = false;
 	sf::RectangleShape rect;
 	sf::Sprite sprite;
 

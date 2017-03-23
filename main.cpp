@@ -96,18 +96,29 @@ int main() {
 	resource1.rect.setFillColor(sf::Color::Green);
 	resource1.rect.setPosition(300, 350);
 	resourceArray.push_back(resource1);
+	resource1.rect.setPosition(300, 400);
+	resourceArray.push_back(resource1);
+	resource1.resource1 = false;
+
 	resource1.resource1 = false;
 	resource1.resource2 = true;
 	resource1.resource3 = false;
 	resource1.rect.setFillColor(sf::Color::Blue);
-	resource1.rect.setPosition(400, 250);
+	resource1.rect.setPosition(450, 250);
 	resourceArray.push_back(resource1);
+	resource1.rect.setPosition(400, 400);
+	resourceArray.push_back(resource1);
+	resource1.resource2 = false;
+
 	resource1.resource1 = false;
 	resource1.resource2 = false;
 	resource1.resource3 = true;
 	resource1.rect.setFillColor(sf::Color::Red);
 	resource1.rect.setPosition(200, 250);
 	resourceArray.push_back(resource1);
+	resource1.rect.setPosition(200, 400);
+	resourceArray.push_back(resource1);
+	resource1.resource3 = false;
 	//---------------------------------------------------------------------------------------------------------------
 
 
@@ -257,41 +268,6 @@ int main() {
 		//---------------------------------------------------------------------------------------------------------------
 
 
-		//---------------------------------------------------------------------------------------------------------------
-		//Cuong
-		//Player Wall Collision
-		counter = 0;
-		for (wallit = wallArray.begin(); wallit != wallArray.end(); wallit++) {
-			if (player.body.getGlobalBounds().intersects(wallArray[counter].rect.getGlobalBounds()))
-			{
-				//Hit wall
-				if (player.direction == 1) //Up
-				{
-					player.faceUp = false;
-					player.body.move(0, 1);
-				}
-				else if (player.direction == 2) //Down
-				{
-					player.faceDown = false;
-					player.body.move(0, -1);
-				}
-				else if (player.direction == 3) //Left
-				{
-					player.faceLeft = false;
-					player.body.move(1, 0);
-				}
-				else if (player.direction == 4) //Right
-				{
-					player.faceRight = false;
-					player.body.move(-1, 0);
-				}
-				else {}
-			}
-			counter++;
-		}
-		//---------------------------------------------------------------------------------------------------------------
-
-
 		window.setView(player.view);
 
 		//---------------------------------------------------------------------------------------------------------------
@@ -323,6 +299,44 @@ int main() {
 					player.body.move(-1, 0);
 				}
 				else {}
+			}
+			counter++;
+		}
+		//Collision with Resources
+		counter = 0;
+		for (resourceit = resourceArray.begin(); resourceit != resourceArray.end(); resourceit++) {
+			if (player.body.getGlobalBounds().intersects(resourceArray[counter].rect.getGlobalBounds()))
+			{
+				//Hit Resource
+				if (resourceArray[counter].resource1 == true) //resource 1
+				{
+					player.health += 1;
+					cout << "health: " << player.health << endl;
+					resourceArray[counter].gathered = true;
+				}
+				if (resourceArray[counter].resource2 == true) //resource 2
+				{
+					player.ammo += 1;
+					cout << "ammo: " << player.ammo << endl;
+					resourceArray[counter].gathered = true;
+				}
+				if (resourceArray[counter].resource3 == true) //resource 3
+				{
+					player.tower += 1;
+					cout << "tower: " << player.tower << endl;
+					resourceArray[counter].gathered = true;
+				}
+			}
+			counter++;
+		}
+		//Remove Resource
+		counter = 0;
+		for (resourceit = resourceArray.begin(); resourceit != resourceArray.end(); resourceit++)
+		{
+			if (resourceArray[counter].gathered == true)
+			{
+				resourceArray.erase(resourceit);  //clear() removes all
+				break;
 			}
 			counter++;
 		}
