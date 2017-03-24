@@ -87,13 +87,15 @@ int main() {
 	vector<Resource>::const_iterator resourceit;
 	vector<Resource> resourceArray;
 	class Resource resource1;
-	sf::Texture textureResource1;
+	sf::Texture textureResource1, textureResource2, textureResource3;
 
 	//Miguel Resource Allocation
 	resource1.resource1 = true;
 	resource1.resource2 = false;
 	resource1.resource3 = false;
-	resource1.rect.setFillColor(sf::Color::Green);
+	textureResource1.loadFromFile("res1.png");
+	resource1.rect.setTexture(&textureResource1);
+	//resource1.rect.setFillColor(sf::Color::Green);
 	resource1.rect.setPosition(300, 350);
 	resourceArray.push_back(resource1);
 	resource1.rect.setPosition(300, 400);
@@ -103,7 +105,9 @@ int main() {
 	resource1.resource1 = false;
 	resource1.resource2 = true;
 	resource1.resource3 = false;
-	resource1.rect.setFillColor(sf::Color::Blue);
+	textureResource2.loadFromFile("res2.png");
+	resource1.rect.setTexture(&textureResource2);
+	//resource1.rect.setFillColor(sf::Color::Blue);
 	resource1.rect.setPosition(450, 250);
 	resourceArray.push_back(resource1);
 	resource1.rect.setPosition(400, 400);
@@ -113,7 +117,9 @@ int main() {
 	resource1.resource1 = false;
 	resource1.resource2 = false;
 	resource1.resource3 = true;
-	resource1.rect.setFillColor(sf::Color::Red);
+	textureResource3.loadFromFile("res3.png");
+	resource1.rect.setTexture(&textureResource3);
+	//resource1.rect.setFillColor(sf::Color::Red);
 	resource1.rect.setPosition(200, 250);
 	resourceArray.push_back(resource1);
 	resource1.rect.setPosition(200, 400);
@@ -167,7 +173,9 @@ int main() {
 	audio.backgroundmusic1.setVolume(25);
 	//---------------------------------------------------------------------------------------------------------------
 
-
+	cout << "Current Health: " << player.health << endl;
+	cout << "Current Ammo: " << player.ammo << endl;
+	cout << "Current Tower: " << player.tower << endl;
 
 	while (window.isOpen())
 	{
