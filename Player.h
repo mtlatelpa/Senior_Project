@@ -32,7 +32,11 @@ public:
 	bool faceUp = true;
 	bool faceDown = true;
 	//Player Health+Ammo+Tower
-	int health = 5;
+////////////////////////////////////////////////
+//						4/2/17
+	int maxHealth = 5;
+/////////////////////////////////////////////////
+	int health = 3;
 	int ammo = 3;
 	int tower = 1;
 };

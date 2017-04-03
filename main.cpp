@@ -21,11 +21,19 @@ int main() {
 	int flag = 0, counter = 0, help = 0;
 	sf::Clock clock1; // clock for AI
 	int counter2 = 0, counter3 = 0;
-
-	//Gerardo 
-	//Player character texture, rectangle bound to box
+	//---------------------------------------------------------------------------------------------------------------
+	//Gerardo Player character texture, rectangle bound to box
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("char_sprite_walk_swords.png");
+	//Gerardo Player Sprite/Sound
+	Player player(&playerTexture, sf::Vector2u(3, 3), 0.3f, 100.0f);
+	//Assigning Player Footstep Sounds
+	if (!player.soundBuf.loadFromFile("foot.wav"))
+		std::cout << "can't open sound file" << std::endl;
+	player.sound.setBuffer(player.soundBuf);
+	player.sound.setVolume(100);
+	//---------------------------------------------------------------------------------------------------------------
+
 
 	//---------------------------------------------------------------------------------------------------------------
 	//Miguel text on screen
@@ -50,35 +58,163 @@ int main() {
 	textHelp2.setString("\n(H) Help?\n(F) - Flashlight\n(Space) - Shoot\n(1) - Melee\n(2) - Sword\n(3) - Tower\n");
 	//---------------------------------------------------------------------------------------------------------------
 
-
 	//---------------------------------------------------------------------------------------------------------------
-	//Miguel Walls
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//																4/2/17
+	//Miguel Health Bar
+	sf::Texture textureHealthBar;
+	if (!textureHealthBar.loadFromFile("healthBar2.png")) {
+		cout << "Health Bar texture not found!\n";
+	}
+	sf::Sprite spriteHealth0, spriteHealth1, spriteHealth2, spriteHealth3, spriteHealth4, spriteHealth5;
+	spriteHealth5.setTexture(textureHealthBar); spriteHealth5.setTextureRect(sf::IntRect(0, 0, 111, 47)); spriteHealth5.setPosition(sf::Vector2f(609, 0));
+	spriteHealth4.setTexture(textureHealthBar); spriteHealth4.setTextureRect(sf::IntRect(0, 48, 111, 47)); spriteHealth4.setPosition(sf::Vector2f(609, 0));
+	spriteHealth3.setTexture(textureHealthBar); spriteHealth3.setTextureRect(sf::IntRect(0, 94, 111, 47)); spriteHealth3.setPosition(sf::Vector2f(609, 0)); 
+	spriteHealth2.setTexture(textureHealthBar); spriteHealth2.setTextureRect(sf::IntRect(0, 142, 111, 47)); spriteHealth2.setPosition(sf::Vector2f(609, 0));
+	spriteHealth1.setTexture(textureHealthBar); spriteHealth1.setTextureRect(sf::IntRect(0, 190, 111, 47)); spriteHealth1.setPosition(sf::Vector2f(609, 0));
+	spriteHealth0.setTexture(textureHealthBar); spriteHealth0.setTextureRect(sf::IntRect(0, 237, 111, 47)); spriteHealth0.setPosition(sf::Vector2f(609, 0));
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//---------------------------------------------------------------------------------------------------------------
+	
+	//---------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Miguel Walls							4/2/17				Just Copy and Paste whole wall section
+	//For now I just did the borders for each section
 	vector<Wall>::const_iterator wallit;
 	vector<Wall> wallArray;
 
-	class Wall wall1, wall2, wall3, wall4;
-	/*sf::Texture textureWall;
-	textureWall.loadFromFile("cave_top.png");
-	wall1.rect.setTexture(&textureWall);
-	sf::Texture textureWall2;
-	textureWall2.loadFromFile("cave_bottom_left.png");
-	wall2.rect.setTexture(&textureWall2);
-	sf::Texture textureWall3;
-	textureWall3.loadFromFile("cave_bottom_right.png");
-	wall3.rect.setTexture(&textureWall3);
-	*/
+	class Wall wall0, wall1, wall2, wall3, wall4;
+
+	sf::Texture textureWall;
+	textureWall.loadFromFile("wall.jpg");
+	wall0.rect.setTexture(&textureWall);
+	//East Walls
+	///Top+Bottom+Right
+	for (int i = 720; i <= 1370; i += 50)
+	{
+		wall0.rect.setPosition(i, 0);
+		wallArray.push_back(wall0);
+		wall0.rect.setPosition(i, 430);
+		wallArray.push_back(wall0);
+		for (int j = 0; j <= 450; j += 50)
+		{
+			wall0.rect.setPosition(1390, j);
+			wallArray.push_back(wall0);
+		}
+	}
+	///LeftTop
+	for (int j = 0; j <= 100; j += 50)
+	{
+		wall0.rect.setPosition(720, j);
+		wallArray.push_back(wall0);
+	}
+	wall0.rect.setPosition(720, 110);
+	wallArray.push_back(wall0);
+
+	//West Walls
+	///Top+Bottom+Left
+	for (int i = -720; i <= -50; i += 50)
+	{
+		wall0.rect.setPosition(i, 0);
+		wallArray.push_back(wall0);
+		wall0.rect.setPosition(i, 430);
+		wallArray.push_back(wall0);
+		for (int j = 0; j <= 450; j += 50)
+		{
+			wall0.rect.setPosition(-720, j);
+			wallArray.push_back(wall0);
+		}
+	}
+	///RightTop
+	for (int j = 0; j <= 100; j += 50)
+	{
+		wall0.rect.setPosition(-50, j);
+		wallArray.push_back(wall0);
+	}
+	wall0.rect.setPosition(-50, 110);
+	wallArray.push_back(wall0);
+	///RightBottom
+	for (int j = 340; j <= 450; j += 50)
+	{
+		wall0.rect.setPosition(-50, j);
+		wallArray.push_back(wall0);
+	}
+
+	//North
+	///Top+Right+Left
+	for (int i = 0; i <= 720; i += 50) {
+		//wall0.rect.setPosition(i, 0);
+		//wallArray.push_back(wall0);
+		wall0.rect.setPosition(i, -480);
+		wallArray.push_back(wall0);
+		for (int j = -480; j <= -50; j += 50) 
+		{
+			wall0.rect.setPosition(0, j);
+			wallArray.push_back(wall0);
+			wall0.rect.setPosition(670, j);
+			wallArray.push_back(wall0);
+		}
+	}
+	///Bottom Left
+	for (int i = 0; i <= 250; i += 50)
+	{
+		wall0.rect.setPosition(i, -50);
+		wallArray.push_back(wall0);
+	}
+	///Bottom Right
+	for (int i = 400; i <= 720; i += 50)
+	{
+		wall0.rect.setPosition(i, -50);
+		wallArray.push_back(wall0);
+	}
+
+	//South
+	///Bottom+Right+Left
+	for (int i = 0; i <= 720; i += 50) {
+		wall0.rect.setPosition(i, 910);
+		wallArray.push_back(wall0);
+		for (int j = 480; j <= 910; j += 50)
+		{
+			wall0.rect.setPosition(0, j);
+			wallArray.push_back(wall0);
+			wall0.rect.setPosition(670, j);
+			wallArray.push_back(wall0);
+		}
+	}
+	///Top Right
+	for (int i = 149; i <= 720; i += 50)
+	{
+		wall0.rect.setPosition(i, 480);
+		wallArray.push_back(wall0);
+	}
+
+	//Center
+	///Top Left
+	wall1.rect.setFillColor(sf::Color::Transparent);
 	wall1.rect.setPosition(0, 0);
-	wall1.rect.setSize(sf::Vector2f(720, 160));
+	wall1.rect.setSize(sf::Vector2f(300, 160));
 	wallArray.push_back(wall1);
-	wall2.rect.setPosition(0, 340);
-	wall2.rect.setSize(sf::Vector2f(150, 150));
-	wallArray.push_back(wall2);
-	wall3.rect.setPosition(150, 430);
-	wall3.rect.setSize(sf::Vector2f(570, 50));
-	wallArray.push_back(wall3);
-	wall4.rect.setPosition(560, 240);
-	wall4.rect.setSize(sf::Vector2f(30, 10));
-	wallArray.push_back(wall4);
+	///Top Right
+	wall1.rect.setPosition(400, 0);
+	wall1.rect.setSize(sf::Vector2f(320, 160));
+	wallArray.push_back(wall1);
+	///Bottom Left
+	wall1.rect.setPosition(0, 340);
+	wall1.rect.setSize(sf::Vector2f(50, 140));
+	wallArray.push_back(wall1);
+	wall1.rect.setPosition(149, 340);
+	wall1.rect.setSize(sf::Vector2f(1, 140));
+	wallArray.push_back(wall1);
+	///Bottom Right
+	wall1.rect.setPosition(150, 430);
+	wall1.rect.setSize(sf::Vector2f(570, 50));
+	wallArray.push_back(wall1);
+	///Tree
+	wall1.rect.setPosition(560, 240);
+	wall1.rect.setSize(sf::Vector2f(30, 10));
+	wallArray.push_back(wall1);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	//---------------------------------------------------------------------------------------------------------------
 
 
@@ -125,17 +261,6 @@ int main() {
 	resource1.rect.setPosition(200, 400);
 	resourceArray.push_back(resource1);
 	resource1.resource3 = false;
-	//---------------------------------------------------------------------------------------------------------------
-
-
-	//---------------------------------------------------------------------------------------------------------------
-	//Gerardo Player Sprite/Sound
-	Player player(&playerTexture, sf::Vector2u(3, 3), 0.3f, 100.0f);
-	//Assigning Player Footstep Sounds
-	if (!player.soundBuf.loadFromFile("foot.wav"))
-		std::cout << "can't open sound file" << std::endl;
-	player.sound.setBuffer(player.soundBuf);
-	player.sound.setVolume(100);
 	//---------------------------------------------------------------------------------------------------------------
 
 
@@ -318,9 +443,16 @@ int main() {
 				//Hit Resource
 				if (resourceArray[counter].resource1 == true) //resource 1
 				{
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//													4/2/17		Should there be a max HP?  I added it because of the health bar
 					player.health += 1;
+					if (player.health >= player.maxHealth)
+					{
+						player.health = player.maxHealth;
+					}
 					cout << "health: " << player.health << endl;
 					resourceArray[counter].gathered = true;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				}
 				if (resourceArray[counter].resource2 == true) //resource 2
 				{
@@ -351,8 +483,7 @@ int main() {
 		//---------------------------------------------------------------------------------------------------------------
 
 		//what is this?
-		window.setView(player.view);
-
+		
 		player.Update(deltaTime);
 		window.clear(sf::Color(125, 125, 125));
 		window.draw(graphics.background);
@@ -371,15 +502,20 @@ int main() {
 			window.draw(wallArray[counter].sprite);
 			counter++;
 		}
-
 		//window.setPosition(sf::Vector2i(50, 50));
 		player.Draw(window);
-		window.draw(wall1.sprite);
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//											4/2/17  
+		/*window.draw(wall1.sprite);
 		window.draw(wall2.sprite);
 		window.draw(wall3.sprite);
-		window.draw(wall4.sprite);
+		window.draw(wall4.sprite);*/
+		window.draw(wall0.sprite);
 		window.draw(graphics.backgroundTree);
-
+		window.draw(graphics.backgroundExitBottom);
+		window.draw(graphics.backgroundExitTop);
+////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		//---------------------------------------------------------------------------------------------------------------
 		//Cuong 
 		//Drawing Enemy
@@ -479,6 +615,24 @@ int main() {
 		//Miguel draw text
 		window.draw(text);
 		help == 0 ? window.draw(textHelp) : window.draw(textHelp2);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//																4/2/17
+		//Miguel draw Health Bar
+		if (player.health == 5)
+			window.draw(spriteHealth5);
+		else if (player.health == 4)
+			window.draw(spriteHealth4);
+		else if (player.health == 3)
+			window.draw(spriteHealth3);
+		else if (player.health == 2)
+			window.draw(spriteHealth2);
+		else if (player.health == 1)
+			window.draw(spriteHealth1);
+		else
+			window.draw(spriteHealth0);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		//---------------------------------------------------------------------------------------------------------------
 
 		//displaying Escape Menu

@@ -38,7 +38,20 @@ Graphic::Graphic()
 	backgroundTree.setPosition(500.0f, 100.0f);
 	treeTexture.loadFromFile("dark_tree.png");
 	backgroundTree.setTexture(&treeTexture);
-
+///////////////////////////////////////////////////////////////////////////////////////
+//										4/2/17
+	//Bottom Exit
+	backgroundExitBottom.setPosition(50, 340);
+	backgroundExitBottom.setSize(sf::Vector2f(100, 140));
+	exitbottomTexture.loadFromFile("exitBottom.png");
+	backgroundExitBottom.setTexture(&exitbottomTexture);
+	
+	//Top Exit
+	backgroundExitTop.setPosition(300, 0);
+	backgroundExitTop.setSize(sf::Vector2f(100, 160));
+	exittopTexture.loadFromFile("exitTop.png");
+	backgroundExitTop.setTexture(&exittopTexture);
+/////////////////////////////////////////////////////////////////////////////////////////
 	//Menu Image
 	menuImage.setSize(sf::Vector2f(720.0f, 480.0f));
 	menuTexture.loadFromFile("menu_1.png");

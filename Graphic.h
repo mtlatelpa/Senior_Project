@@ -27,6 +27,15 @@ public:
 	//Tree image
 	sf::RectangleShape backgroundTree;
 	sf::Texture treeTexture;
+////////////////////////////////////////////////////////////////////
+//						4/2/17
+	//ExitTop image
+	sf::RectangleShape backgroundExitTop;
+	sf::Texture exittopTexture;
+	//ExitBottom image
+	sf::RectangleShape backgroundExitBottom;
+	sf::Texture exitbottomTexture;
+////////////////////////////////////////////////////////////////////
 	//Menu Image
 	sf::RectangleShape menuImage;
 	sf::Texture menuTexture;
