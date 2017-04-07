@@ -58,9 +58,9 @@ int main() {
 	tower1.setTexture(&towertex1);
 	tower2.setTexture(&towertex2);
 	tower3.setTexture(&towertex3);
-	tower1.setPosition(0.0f, 0.0f);
-	tower2.setPosition(0.0f, 0.0f);
-	tower3.setPosition(0.0f, 0.0f);
+	tower1.setPosition(630.0f, 48.0f);
+	tower2.setPosition(660.0f, 48.0f);
+	tower3.setPosition(690.0f, 48.0f);
 
 
 	//---------------------------------------------------------------------------------------------------------------
@@ -86,20 +86,26 @@ int main() {
 	sf::Text textHelp2;
 	textHelp2.setFont(font);
 	textHelp2.setCharacterSize(15);
-	textHelp2.setString("\n(H) Help?\n(F) - Flashlight\n(Space) - Shoot\n(1) - Melee\n(2) - Gun\n(3) - Tower\n");
+	textHelp2.setString("\n(H) Help?\n(F) - Flashlight\n(Space) - Shoot\n(1) - Melee\n(2) - Gun\n(3) - God\n");
 	//---------------------------------------------------------------------------------------------------------------
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//														4/2/17-4/7/17
-	//Miguel Health Bar
-	sf::Texture textureHealthBar;
+	//Miguel Health+Ammo Bar
+	sf::Texture textureHealthBar, textureAmmoBar;
 	if (!textureHealthBar.loadFromFile("healthBar2.png")) {
 		cout << "Health Bar texture not found!\n";
 	}
+	if (!textureAmmoBar.loadFromFile("ammoBar2.png")) {
+		cout << "Ammo Bar texture not found!\n";
+	}
 	sf::Sprite spriteHealth[6][7]; //, spriteHealth1, spriteHealth2, spriteHealth3, spriteHealth4, spriteHealth5;
+	sf::Sprite spriteAmmo[10][7];
 	for (int j = 0; j < 7; j++) {
 		for (int i = 0; i < 6; i++) {
 			spriteHealth[i][j].setTexture(textureHealthBar);
+			spriteAmmo[i][j].setTexture(textureAmmoBar);
+			spriteAmmo[i][j].setTextureRect(sf::IntRect(0, 47, 47, 47));
 		}
 		spriteHealth[5][j].setTextureRect(sf::IntRect(0, 0, 111, 47));
 		spriteHealth[4][j].setTextureRect(sf::IntRect(0, 48, 111, 47));
@@ -109,7 +115,11 @@ int main() {
 		spriteHealth[0][j].setTextureRect(sf::IntRect(0, 237, 111, 47));
 	}
 	//if (player.here == 1) {
-		for (int i = 0; i < 6; i++) { spriteHealth[i][0].setPosition(sf::Vector2f(609, -480)); }
+		for (int i = 0; i < 6; i++) 
+		{ 
+			spriteHealth[i][0].setPosition(sf::Vector2f(609, -480)); 
+			spriteAmmo[i][0].setPosition(sf::Vector2f(609, -433));
+		}
 	//}
 	//else if (player.here == 2) {
 		for (int i = 0; i < 6; i++) { spriteHealth[i][1].setPosition(sf::Vector2f(1329, 0)); }
@@ -589,6 +599,9 @@ int main() {
 				//Gerardo 4/4 Moved code
 				if (evnt.key.code == sf::Keyboard::H) {
 					help ^= 1;
+					cout << "Health: " << player.health << endl;
+					cout << "Ammo  : " << player.ammo << endl;
+					cout << "Tower : " << player.tower << endl;
 				}
 			}
 			//---------------------------------------------------------------------------------------------------------------
@@ -662,6 +675,13 @@ int main() {
 				flag = 1;
 			}
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
+		{
+			player.ammo = 30;
+			player.health = 30;
+			player.tower = 3;
+			player.gun = 1;
+		}
 		if (flag == 0)
 		{
 			playerTexture.loadFromFile("char_sprite_walk3.png");
@@ -674,7 +694,6 @@ int main() {
 		//sf::Vector2f playerpos = player.body.getPosition();
 		//std::cout << playerpos.x << std::endl;
 		//std::cout << playerpos.y << std::endl;
-
 		//---------------------------------------------------------------------------------------------------------------
 		//Cuong 04/01
 		//Enemy Wall Collision
@@ -1331,7 +1350,7 @@ int main() {
 		//														4/2/17-4/7/17
 		//Miguel draw Health Bar
 		for (int j = 0; j < 7; j++) {
-			if (player.health <= 5 && player.health > 4)
+			if (player.health > 4)
 				window.draw(spriteHealth[5][j]);
 			else if (player.health <= 4 && player.health > 3)
 				window.draw(spriteHealth[4][j]);
