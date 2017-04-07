@@ -24,20 +24,31 @@ public:
 	//North background image
 	sf::RectangleShape background5;
 	sf::Texture backgroundImage5;
-	//Tree image
+	//Southwest background
+	sf::RectangleShape background6;
+	sf::Texture backgroundImage6;
+	//Southeast background
+	sf::RectangleShape background7;
+	sf::Texture backgroundImage7;
+
 	sf::RectangleShape backgroundTree;
 	sf::Texture treeTexture;
-////////////////////////////////////////////////////////////////////
-//						4/2/17
+
+	////////////////////////////////////////////////////////////////////
+	//						4/2/17
 	//ExitTop image
 	sf::RectangleShape backgroundExitTop;
+	sf::RectangleShape backgroundExitTop2;
 	sf::Texture exittopTexture;
 	//ExitBottom image
 	sf::RectangleShape backgroundExitBottom;
 	sf::Texture exitbottomTexture;
-////////////////////////////////////////////////////////////////////
-	//Menu Image
+	////////////////////////////////////////////////////////////////////
+
 	sf::RectangleShape menuImage;
 	sf::Texture menuTexture;
 
+
+
 };
+

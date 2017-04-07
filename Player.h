@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
-#include <iostream>
 #include "Animation.h"
+#include <iostream>
 
 class Player
 {
@@ -18,7 +18,6 @@ public:
 	sf::Sound sound;
 	sf::View view;
 
-	//Player+Movement
 	sf::Vector2f movement;
 	sf::RectangleShape body;
 	Animation animation;
@@ -26,17 +25,35 @@ public:
 	float speed;
 	int direction = 0;
 	bool face;
-	//Collision detection
 	bool faceRight = true;
 	bool faceLeft = true;
 	bool faceUp = true;
 	bool faceDown = true;
+
+	//Miguel
+	double maxHealth = 5;
 	//Player Health+Ammo+Tower
-////////////////////////////////////////////////
-//						4/2/17
-	int maxHealth = 5;
-/////////////////////////////////////////////////
-	int health = 3;
-	int ammo = 3;
-	int tower = 1;
+	double health = 3;
+	int dead = 0;
+	int ammo = 30;
+	int tower = 3;
+	int gun = 0;
+	//Coordinates
+	bool N = false, E = false, C = false, S = false, W = false, SW = false, SE = false;
+	int here = 0;
+private:
+	//sf::RectangleShape body;
+	//Animation animation;
+	//unsigned int row;
+	//float speed;
+	//bool faceRight;
+
+
+
 };
+
+
+
+
+
+
