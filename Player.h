@@ -35,7 +35,7 @@ public:
 	//Player Health+Ammo+Tower
 	double health = 3;
 	int dead = 0;
-	int ammo = 30;
+	int ammo = 3;
 	int tower = 3;
 	int gun = 0;
 	//Coordinates
