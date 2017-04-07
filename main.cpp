@@ -9,7 +9,6 @@
 #include "Resource.h"
 #include "enemy.h"
 #include "Projectile.h"
-#include "enemy.h"
 
 using namespace std;
 int exitgame = 0;
@@ -30,7 +29,7 @@ int main() {
 	int counter2 = 0, counter3 = 0;
 
 	//---------------------------------------------------------------------------------------------------------------
-	//Gerardo 
+	//Gerardo			//Miguel moved code 4/7
 	//Player character texture, rectangle bound to box
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("char_sprite_walk3.png");
@@ -91,7 +90,7 @@ int main() {
 	//---------------------------------------------------------------------------------------------------------------
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//																4/2/17
+	//														4/2/17-4/7/17
 	//Miguel Health Bar
 	sf::Texture textureHealthBar;
 	if (!textureHealthBar.loadFromFile("healthBar2.png")) {
@@ -138,7 +137,7 @@ int main() {
 	//---------------------------------------------------------------------------------------------------------------
 	//Miguel Walls
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//Miguel Walls							4/2/17				Just Copy and Paste whole wall section
+	//Miguel Walls							4/2/17-4/7/17
 	//For now I just did the borders for each section
 	vector<Wall>::const_iterator wallit;
 	vector<Wall> wallArray;
@@ -388,7 +387,7 @@ int main() {
 
 
 	//---------------------------------------------------------------------------------------------------------------
-	//Miguel Resources
+	//Miguel Resources					4/7/17
 	vector<Resource>::const_iterator resourceit;
 	vector<Resource> resourceArray;
 	class Resource resource1;
@@ -556,6 +555,7 @@ int main() {
 				//Gerardo 4/3 Moved Cuongs Code ---------------------------------------------------------------------
 				//Added Gun Sound, and Empty Gun Sound
 				if (evnt.key.code == sf::Keyboard::Space) {
+					//Gerardo+Miguel 4/7 Added flag for gun equipped
 					if (player.gun == 1 && flag == 1) {
 						if (player.ammo > 0) {
 							audio.gunSound.play();
@@ -585,6 +585,7 @@ int main() {
 					}
 					//-----------------------------------------------------------------------------------------------------
 				}
+				//Miguel
 				//Gerardo 4/4 Moved code
 				if (evnt.key.code == sf::Keyboard::H) {
 					help ^= 1;
@@ -653,6 +654,7 @@ int main() {
 		{
 			flag = 0;
 		}
+		//Miguel
 		//Gerardo 4/4 added flag for gun resource
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
 		{
@@ -801,8 +803,6 @@ int main() {
 				//Hit Resource
 				if (resourceArray[counter].resource1 == true) //resource 1
 				{
-					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					//													4/2/17		Should there be a max HP?  I added it because of the health bar
 					player.health += 1;
 					if (player.health >= player.maxHealth)
 					{
@@ -810,7 +810,6 @@ int main() {
 					}
 					cout << "health: " << player.health << endl;
 					resourceArray[counter].gathered = true;
-					//////////////////////////////////////////////////////////////////////////////////
 				}
 				if (resourceArray[counter].resource2 == true) //resource 2
 				{
@@ -1025,25 +1024,6 @@ int main() {
 
 				}
 			}
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			//Miguel - PlayerEnemy Collision
-			/*if (player.body.getGlobalBounds().intersects(enemyArray[counter].rect.getGlobalBounds()))
-			{
-				player.health -= enemy1.enemyAttackDamage1;
-				if (player.health <= 0) {
-					player.health = 0;
-				}
-				cout << "Enemy1 attacked Player by: " << player.health << " damage!" << endl;
-			}
-			if (player.body.getGlobalBounds().intersects(enemy1Array[counter].rect.getGlobalBounds()))
-			{
-				player.health -= enemy2.enemyAttackDamage2;
-				if (player.health <= 0) {
-					player.health = 0;
-				}
-				cout << "Enemy2 attacked Player" << player.health << " damage!" << endl;
-			}*/
-			//////////////////////////////////////////////////////////////////////////////////////////////
 			counter++;
 		}
 
@@ -1078,7 +1058,7 @@ int main() {
 			counter++;
 		}
 		///////////////////////////////////////////////////////////////////////////////////
-		//Miguel
+		//Miguel					4/7/17
 		//Enemy Player Collision
 		counter = 0;
 		for (iter4 = enemyArray.begin(); iter4 != enemyArray.end(); iter4++)
@@ -1348,7 +1328,7 @@ int main() {
 		help == 0 ? window.draw(textHelp) : window.draw(textHelp2);
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//																4/2/17
+		//														4/2/17-4/7/17
 		//Miguel draw Health Bar
 		for (int j = 0; j < 7; j++) {
 			if (player.health <= 5 && player.health > 4)
