@@ -8,10 +8,10 @@ public:
 	Graphic();
 	~Graphic();
 
+	//------Backgrounds----------//
 	//Starting background image
 	sf::RectangleShape background;
 	sf::Texture backgroundImage;
-
 	//East background image
 	sf::RectangleShape background2;
 	sf::Texture backgroundImage2;
@@ -30,12 +30,12 @@ public:
 	//Southeast background
 	sf::RectangleShape background7;
 	sf::Texture backgroundImage7;
-
-	sf::RectangleShape backgroundTree;
+	//Tree
+	sf::RectangleShape backgroundTree, backgroundTree2, backgroundTree3, 
+		backgroundTree4, backgroundTree5, backgroundTree6, backgroundTree7,
+		backgroundTree8;
 	sf::Texture treeTexture;
 
-	////////////////////////////////////////////////////////////////////
-	//						4/2/17
 	//ExitTop image
 	sf::RectangleShape backgroundExitTop;
 	sf::RectangleShape backgroundExitTop2;
@@ -43,12 +43,21 @@ public:
 	//ExitBottom image
 	sf::RectangleShape backgroundExitBottom;
 	sf::Texture exitbottomTexture;
-	////////////////////////////////////////////////////////////////////
 
+	//-----Towers--------------//
+	sf::RectangleShape tower1;
+	sf::RectangleShape tower2;
+	sf::RectangleShape tower3;
+	sf::Texture towertex1;
+	sf::Texture towertex2;
+	sf::Texture towertex3;
+
+	//-----Shaded---------------//
+	sf::RectangleShape playerShade;
+	sf::Texture playerShadeTexture;
+
+	//-----Menu-----------------//
 	sf::RectangleShape menuImage;
 	sf::Texture menuTexture;
 
-
-
 };
-
