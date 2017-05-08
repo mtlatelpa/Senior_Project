@@ -2,7 +2,6 @@
 
 Audio::Audio()
 {
-
 	//Initializing Background Music
 	//Not needed since using sf::Music now...
 	/*
@@ -35,7 +34,6 @@ Audio::Audio()
 		std::cout << "Unable to load Music" << std::endl;
 
 }
-
 
 Audio::~Audio()
 {

@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
-
 class Wall
 {
 public:
@@ -13,4 +12,3 @@ public:
 	sf::RectangleShape rect;
 	sf::Sprite sprite;
 };
-

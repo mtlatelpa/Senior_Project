@@ -30,3 +30,4 @@ bool generateRandomBool()
 		return false;
 	}
 }
+
